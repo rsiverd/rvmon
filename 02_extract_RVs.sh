@@ -11,7 +11,7 @@
 
 ## Default options:
 debug=0 ; clobber=0 ; force=0 ; timer=0 ; vlevel=0
-script_version="0.02"
+script_version="0.03"
 this_prog="${0##*/}"
 #shopt -s nullglob
 # Propagate errors through pipelines: set -o pipefail
@@ -88,8 +88,8 @@ for object in `cat $object_list`; do
    echo "-------------------------------------------"
    obs_list="$meta_dir/tb_list_$object.txt"
    obs_data="$meta_dir/spectra_$object.txt"
-   cmde "grep $object $recent_hdrs > tmp.txt"
-   cmde "iltk -Lr $recent_clean_tars -c tmp.txt -o $obs_list"
+   cmde "grep $object $recent_all_hdrs > tmp.txt"
+   cmde "iltk -Lr $recent_cln_tars -c tmp.txt -o $obs_list"
    cmde "extract-specproc-RVs.sh $obs_list -co $obs_data"
 done
 rm tmp.txt
