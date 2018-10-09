@@ -92,8 +92,8 @@ touch $blacklist
 ##--------------------------------------------------------------------------##
 
 ## Find files, extract metadata:
-nres_sites=( lsc elp cpt tlv )
-month_list=( 2018{01..08} )
+#nres_sites=( lsc elp cpt tlv )
+#month_list=( 2018{01..08} )
 keys="DATE-OBS EXPTIME BLKUID MOLUID OBJECTS"
 arch_dirs=()
 yecho "Searching "
