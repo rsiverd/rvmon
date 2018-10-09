@@ -6,7 +6,7 @@ save_root="${shredder_hd1}/siverd/mayhem_proc"
 ## NRES sites and obs-months to use:
 nres_sites=( lsc elp cpt tlv )
 #month_list=( 2018{01..08} )
-month_list=( )
+month_list=( '??????' )
 
 ## File and metadata lists:
 recent_all_data="recent_all_NRES_spectra.txt"
