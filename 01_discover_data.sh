@@ -109,28 +109,28 @@ done
 gecho "done.\n"
 
 ## Store completed lists:
-cmde "mv -f $foo $recent_data" || exit $?
-cmde "mv -f $bar $recent_tars" || exit $?
-cmde "wc -l $recent_data $recent_tars"
+cmde "mv -f $foo $recent_all_data" || exit $?
+cmde "mv -f $bar $recent_all_tars" || exit $?
+cmde "wc -l $recent_all_data $recent_all_tars"
 #exit
 #find ${arch_dirs[*]} -type f -name "*e00.fits.fz" > $recent_data
 #find ${arch_dirs[*]} -type f -name "*e91.tar.gz"  > $recent_tars
-cmde "imhget $keys --progress -l $recent_data -o $foo"          || exit $?
-cmde "mv -f $foo $recent_hdrs"                                  || exit $?
+cmde "imhget $keys --progress -l $recent_all_data -o $foo"      || exit $?
+cmde "mv -f $foo $recent_all_hdrs"                              || exit $?
 
 ## Purge black-listed files:
-cmde "iltk -L $recent_data -e $blacklist -o $recent_clean_data" || exit $?
-cmde "iltk -L $recent_tars -e $blacklist -o $recent_clean_tars" || exit $?
-cmde "iltk -L $recent_hdrs -e $blacklist -o $recent_clean_hdrs" || exit $?
+cmde "iltk -L $recent_all_data -e $blacklist -o $recent_cln_data" || exit $?
+cmde "iltk -L $recent_all_tars -e $blacklist -o $recent_cln_tars" || exit $?
+cmde "iltk -L $recent_all_hdrs -e $blacklist -o $recent_cln_hdrs" || exit $?
 
 ## Extract objects:
-cut -d' ' -f6- ${recent_clean_hdrs} | sed 's/\&thar.*$//' \
+cut -d' ' -f6- ${recent_cln_hdrs} | sed 's/\&thar.*$//' \
    | sort -u > $all_objects
 
 ##--------------------------------------------------------------------------##
 
 ## select KELT objects:
-grep KEB ${recent_clean_hdrs} | awk '{ print $6 }' | cut -d\& -f1 \
+grep KEB ${recent_cln_hdrs} | awk '{ print $6 }' | cut -d\& -f1 \
    | sort -u > $object_list
 cat <(grep KEB $all_objects) <(grep KELT $all_objects) \
     <(grep Jupiter $all_objects) <(grep rocyon $all_objects) \
