@@ -1,6 +1,8 @@
 #!/bin/bash
 #
-#
+# Identify raw (e00) and processed (e91) NRES products to be used by
+# subsequent monitoring scripts. File location information shall be
+# picked up from config.sh.
 #
 # Rob Siverd
 # Created:      2018-04-17
@@ -11,7 +13,7 @@
 
 ## Default options:
 debug=0 ; clobber=0 ; force=0 ; timer=0 ; vlevel=0
-script_version="0.04"
+script_version="0.05"
 this_prog="${0##*/}"
 #shopt -s nullglob
 # Propagate errors through pipelines: set -o pipefail
@@ -83,6 +85,10 @@ fi
 cmde "source config.sh" || exit $?
 touch $blacklist
 
+## Make sure arch_root is defined and present:
+[ -z "$arch_root" ] && ErrorAbort "Data storage path 'arch_root' not defined!"
+[ -d $arch_root ] || ErrorAbort "Can't find directory: $arch_root"
+
 ##--------------------------------------------------------------------------##
 
 ## Find files, extract metadata:
@@ -94,7 +100,7 @@ yecho "Searching "
 rm $foo $bar 2>/dev/null
 for site in ${nres_sites[*]}; do
    yecho "$site ... "
-   arch_site="/archive/engineering/$site"
+   arch_site="$arch_root/$site"
    for month in ${month_list[*]}; do
       find $arch_site/nres0?/${month}?? -type f -name "*e00.fits.fz" 2>/dev/null >> $foo
       find $arch_site/nres0?/${month}?? -type f -name "*e91.tar.gz"  2>/dev/null >> $bar
