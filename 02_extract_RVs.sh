@@ -90,7 +90,7 @@ for object in `cat $object_list`; do
    obs_data="$meta_dir/spectra_$object.txt"
    cmde "grep $object $recent_all_hdrs > tmp.txt"
    cmde "iltk -Lr $recent_cln_tars -c tmp.txt -o $obs_list"
-   cmde "extract-specproc-RVs.sh $obs_list -co $obs_data"
+   cmde "extract-specproc-RVs $obs_list -co $obs_data"
 done
 rm tmp.txt
 
