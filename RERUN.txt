@@ -1,0 +1,6 @@
+
+%run ./quickplot_rvs.py -E ephems.txt -o KEBC09C05946.png datasets/spectra_KEBC09C05946.txt
+%run ./quickplot_rvs.py -E ephems.txt -o KEBC20C05718.png datasets/spectra_KEBC20C05718.txt
+%run ./quickplot_rvs.py -E ephems.txt -o KEBS36C03645.png datasets/spectra_KEBS36C003645.txt
+
+

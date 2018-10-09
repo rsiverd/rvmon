@@ -1,0 +1,65 @@
+
+recent_data="recent_NRES_spectra.txt"
+recent_hdrs="recent_NRES_headers.txt"
+recent_tars="recent_NRES_tarballs.txt"
+all_objects="all_objects.txt"
+object_list="object_list.txt"
+plot_dir="orbit_plots"
+meta_dir="datasets"
+mkdir -p $meta_dir $plot_dir
+
+
+
+arch_dirs=( `ls -d /archive/engineering/{lsc,elp}/nres0?/201803??`
+            `ls -d /archive/engineering/{lsc,elp}/nres0?/201804??`
+            `ls -d /archive/engineering/{lsc,elp}/nres0?/201805??` )
+find ${arch_dirs[*]} -type f -name "*e00.fits.fz" > $recent_data
+find ${arch_dirs[*]} -type f -name "*e91.tar.gz"  > $recent_tars
+
+# purge black-listed files:
+for thing in $recent_data $recent_tars; do
+   cmde "iltk -L $thing -e blacklist.txt -o tmp.txt" || exit $?
+   cmde "mv -f tmp.txt $thing" || exit $?
+done
+
+cmde "nrgh --progress -d\, -l $recent_data -o $recent_hdrs"
+
+#cut -d' ' -f6- $recent_hdrs | sed 's/\&thar.*$//' | sort -u > $all_objects
+cut -d',' -f6- $recent_hdrs | sed 's/\&thar.*$//' | sort -u > $all_objects
+
+
+# select KELT objects:
+#grep KEB $recent_hdrs | awk '{ print $6 }' | cut -d\& -f1 \
+#   | sort -u > $object_list
+cat <(grep KEB $all_objects) <(grep KELT $all_objects) \
+    <(grep Jupiter $all_objects) <(grep BD093070 $all_objects) \
+    <(grep rocyon $all_objects) \
+    <(grep '^KS' $all_objects) | awk -F, '{ print $1 }' | sort -u > $object_list
+    #<(grep '^KS' $all_objects) | sort -u > $object_list
+
+
+
+for object in `cat $object_list`; do
+   echo "-------------------------------------------"
+   obs_list="$meta_dir/tb_list_$object.txt"
+   obs_data="$meta_dir/spectra_$object.txt"
+   cmde "grep $object $recent_hdrs > tmp.txt"
+   cmde "iltk -Lr $recent_tars -c tmp.txt -o $obs_list"
+   cmde "./extract-specproc-RVs.sh $obs_list -co $obs_data"
+done
+rm tmp.txt
+
+# -----------------------------------------------------------------------
+# ANALYSIS:
+
+for object in `cat $object_list`; do
+   obs_data="$meta_dir/spectra_$object.txt"
+   obs_plot="$plot_dir/plots_$object.png"
+   cmde "./quickplot_rvs.py $obs_data -E ephems.txt -o $obs_plot"
+done
+
+
+# -----------------------------------------------------------------------
+# ANALYSIS:
+
+

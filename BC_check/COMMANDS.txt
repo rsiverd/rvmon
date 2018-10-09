@@ -1,0 +1,15 @@
+paste BC_inputs.txt BC_results.txt > compare.txt
+
+in Python ...
+
+derp = np.loadtxt('BC_check/compare.txt')
+jdmid, have_kms, calc_ms = derp.T
+have_ms = 1e3 * have_kms
+
+
+plot(jdmid, have_ms, label='tim')
+plot(jdmid, calc_ms, label='jason')
+legend()
+
+# Does Tim have the sense of the diurnal correction backwards?
+

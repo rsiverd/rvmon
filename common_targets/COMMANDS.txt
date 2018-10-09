@@ -1,0 +1,24 @@
+
+echo "filename,dateobs,exptime,blkuid,moluid,objects" > observed.txt
+cat ../recent_NRES_headers.txt | sed 's/ /,/' | sed 's/ /,/' \
+   | sed 's/ /,/' | sed 's/ /,/' | sed 's/ /,/' | >> observed.txt
+
+
+grep HR7596 ../recent_NRES_headers.txt | sort -rk2 > tmp
+grep -m1 lsc tmp
+grep -m1 elp tmp
+grep -m1 cpt tmp
+echo
+cmde "flztfs `cat <(grep -m1 elp tmp) <(grep -m1 lsc tmp) <(grep -m1 cpt tmp) | awk '{ print $1 }' | tr '\n' ' '`"
+echo
+
+mkdir -p fixed
+#for image in `cat <(grep -m1 elp tmp) <(grep -m1 lsc tmp) <(grep -m1 cpt tmp) | awk '{ print $1 }' | tr '\n' ' '`"
+for image in `cat <(grep -m1 elp tmp) <(grep -m1 lsc tmp) <(grep -m1 cpt tmp) | awk '{ print $1 }'`; do
+   cmde "nres-cdp-trim-oscan $image -o fixed/`basename $image .fz`"
+done
+
+cmde "flztfs fixed/*.fits"
+
+
+

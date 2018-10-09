@@ -1,0 +1,6 @@
+              zfile          vshift
+ZEROlsc2017319.35121            0.0
+#ZEROelp2017291.27805           17.0   # for KEBC09C05946
+ZEROelp2017291.27805           10.0    # for KEBC20C05718
+ZEROlsc2017320.26719           70.0
+#ZEROlsc2017320.26719.fits      50.0

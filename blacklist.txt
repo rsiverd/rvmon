@@ -1,0 +1,16 @@
+elpnrs02-fl17-20180324-0016-e91.tar.gz
+elpnrs02-fl17-20180325-0016-e91.tar.gz
+elpnrs02-fl17-20180329-0016-e91.tar.gz
+elpnrs02-fl17-20180329-0017-e91.tar.gz
+elpnrs02-fl17-20180329-0018-e91.tar.gz
+elpnrs02-fl17-20180330-0020-e91.tar.gz
+elpnrs02-fl17-20180330-0021-e91.tar.gz
+elpnrs02-fl17-20180330-0022-e91.tar.gz
+lscnrs01-fl09-20180328-0048-e91.tar.gz
+lscnrs01-fl09-20180328-0049-e91.tar.gz
+lscnrs01-fl09-20180330-0036-e91.tar.gz
+lscnrs01-fl09-20180330-0037-e91.tar.gz
+lscnrs01-fl09-20180330-0038-e91.tar.gz
+lscnrs01-fl09-20180330-0042-e91.tar.gz    # ThAr lamp failure
+lscnrs01-fl09-20180330-0043-e91.tar.gz    # ThAr lamp failure
+lscnrs01-fl09-20180330-0044-e91.tar.gz    # ThAr lamp failure
