@@ -101,10 +101,10 @@ done
 exit 0
 
 ######################################################################
-# CHANGELOG (03_make_orbit_plots.sh):
+# CHANGELOG (09_make_orbit_plots.sh):
 #---------------------------------------------------------------------
 #
 #  2018-04-17:
 #     -- Increased script_version to 0.01.
-#     -- First created 03_make_orbit_plots.sh.
+#     -- First created 09_make_orbit_plots.sh.
 #
