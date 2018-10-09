@@ -1,10 +1,10 @@
 #!/bin/bash
 #
-#
+# Pull RV information out of tarballs and raw spectra.
 #
 # Rob Siverd
 # Created:      2018-04-17
-# Last updated: 2018-04-17
+# Last updated: 2018-10-09
 #--------------------------------------------------------------------------
 #**************************************************************************
 #--------------------------------------------------------------------------
@@ -46,7 +46,7 @@ trap "$jnk_cleanup" EXIT
 
 ## Required programs:
 declare -a need_exec
-need_exec+=( awk cat FuncDef sed tr )
+need_exec+=( awk cat extract-specproc-RVs FuncDef iltk sed tr )
 #need_exec+=( shuf shuffle sort ) # for randomization
 for need in ${need_exec[*]}; do
    if ! ( /usr/bin/which $need >& /dev/null ); then
@@ -90,7 +90,7 @@ for object in `cat $object_list`; do
    obs_data="$meta_dir/spectra_$object.txt"
    cmde "grep $object $recent_hdrs > tmp.txt"
    cmde "iltk -Lr $recent_clean_tars -c tmp.txt -o $obs_list"
-   cmde "./extract-specproc-RVs.sh $obs_list -co $obs_data"
+   cmde "extract-specproc-RVs.sh $obs_list -co $obs_data"
 done
 rm tmp.txt
 
