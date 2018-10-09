@@ -89,11 +89,13 @@ touch $blacklist
 [ -z "$arch_root" ] && ErrorAbort "Data storage path 'arch_root' not defined!"
 [ -d $arch_root ] || ErrorAbort "Can't find directory: $arch_root"
 
+## Ensure nres_sites is defined and has non-zero length:
+[ ${#nres_sites[*]} -eq 0 ] && ErrorAbort "Empty nres_sites in config.sh!"
+[ ${#month_list[*]} -eq 0 ] && ErrorAbort "Empty month_list in config.sh!"
+
 ##--------------------------------------------------------------------------##
 
 ## Find files, extract metadata:
-#nres_sites=( lsc elp cpt tlv )
-#month_list=( 2018{01..08} )
 keys="DATE-OBS EXPTIME BLKUID MOLUID OBJECTS"
 arch_dirs=()
 yecho "Searching "
