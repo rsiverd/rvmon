@@ -88,8 +88,8 @@ for object in `cat $object_list`; do
    echo "-------------------------------------------"
    obs_list="$meta_dir/tb_list_$object.txt"
    obs_data="$meta_dir/spectra_$object.txt"
-   cmde "grep $object $recent_all_hdrs > tmp.txt"
-   cmde "iltk -Lr $recent_cln_tars -c tmp.txt -o $obs_list"
+   cmde "grep $object $recent_all_img_hdrs > tmp.txt"
+   cmde "iltk -Lr $recent_cln_tarballs -c tmp.txt -o $obs_list"
    cmde "extract-specproc-RVs $obs_list -co $obs_data"
 done
 rm tmp.txt

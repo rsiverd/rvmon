@@ -112,18 +112,20 @@ gecho "done.\n"
 
 ## Store completed lists:
 cmde "mv -f $foo $recent_all_data" || exit $?
-cmde "mv -f $bar $recent_all_tars" || exit $?
-cmde "wc -l $recent_all_data $recent_all_tars"
+cmde "mv -f $bar $recent_all_tarballs" || exit $?
+cmde "wc -l $recent_all_data $recent_all_tarballs"
 #exit
 #find ${arch_dirs[*]} -type f -name "*e00.fits.fz" > $recent_data
-#find ${arch_dirs[*]} -type f -name "*e91.tar.gz"  > $recent_tars
+#find ${arch_dirs[*]} -type f -name "*e91.tar.gz"  > $recent_tarballs
+
+## Collect header keywords from image files:
 cmde "imhget $keys --progress -l $recent_all_data -o $foo"      || exit $?
 cmde "mv -f $foo $recent_all_hdrs"                              || exit $?
 
 ## Purge black-listed files:
 cmde "iltk -L $recent_all_data -e $blacklist -o $recent_cln_data" || exit $?
-cmde "iltk -L $recent_all_tars -e $blacklist -o $recent_cln_tars" || exit $?
-cmde "iltk -L $recent_all_hdrs -e $blacklist -o $recent_cln_hdrs" || exit $?
+cmde "iltk -L $recent_all_tarballs -e $blacklist -o $recent_cln_tarballs" || exit $?
+cmde "iltk -L $recent_all_img_hdrs -e $blacklist -o $recent_cln_img_hdrs" || exit $?
 
 ## Extract objects:
 cut -d' ' -f6- ${recent_cln_hdrs} | sed 's/\&thar.*$//' \

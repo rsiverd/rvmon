@@ -9,12 +9,14 @@ nres_sites=( lsc elp cpt tlv )
 month_list=( '??????' )
 
 ## File and metadata lists:
-recent_all_data="recent_all_NRES_spectra.txt"
-recent_all_hdrs="recent_all_NRES_headers.txt"
-recent_all_tars="recent_all_NRES_tarballs.txt"
-recent_cln_data="recent_cln_NRES_spectra.txt"
-recent_cln_hdrs="recent_cln_NRES_headers.txt"
-recent_cln_tars="recent_cln_NRES_tarballs.txt"
+info_dir="meta_info"
+mkdir -p $info_dir
+recent_all_data="${info_dir}/recent_all_NRES_spectra.txt"
+recent_all_img_hdrs="${info_dir}/recent_all_NRES_headers.txt"
+recent_all_tarballs="${info_dir}/recent_all_NRES_tarballs.txt"
+recent_cln_data="${info_dir}/recent_cln_NRES_spectra.txt"
+recent_cln_img_hdrs="${info_dir}/recent_cln_NRES_headers.txt"
+recent_cln_tarballs="${info_dir}/recent_cln_NRES_tarballs.txt"
 all_objects="all_objects.txt"
 object_list="object_list.txt"
 blacklist="blacklist.txt"
