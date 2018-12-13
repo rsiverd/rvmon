@@ -5,13 +5,13 @@
 #
 # Rob Siverd
 # Created:       2018-03-25
-# Last modified: 2018-06-07
+# Last modified: 2018-12-13
 #--------------------------------------------------------------------------
 #**************************************************************************
 #--------------------------------------------------------------------------
 
 ## Current version:
-__version__ = "0.3.5"
+__version__ = "0.3.6"
 
 ## Python version-agnostic module reloading:
 try:
@@ -433,7 +433,8 @@ use_data   = all_data
 ## Toss extreme outliers:
 if (n_all_data >= 5):
     #keepers = pick_inliers(all_data['ccval'], 10)
-    keepers = pick_inliers(all_data['rvval'], 10)
+    keepers = pick_inliers(all_data['rvval'], 10) \
+            & (all_data['bjd_objs'] > 2450000.0)
     use_data = all_data[keepers]
 else:
     sys.stderr.write("Skipping outlier rejection (too few points).\n")
