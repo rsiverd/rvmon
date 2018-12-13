@@ -434,7 +434,7 @@ use_data   = all_data
 if (n_all_data >= 5):
     #keepers = pick_inliers(all_data['ccval'], 10)
     keepers = pick_inliers(all_data['rvval'], 10) \
-            & (all_data['bjd_objs'] > 2450000.0)
+            & (all_data['bjd_obs'] > 2450000.0)
     use_data = all_data[keepers]
 else:
     sys.stderr.write("Skipping outlier rejection (too few points).\n")
